@@ -85,6 +85,8 @@ after
 <AclServices HTTPLanEnable="1" HTTPWanEnable="0" FTPLanEnable="0" FTPWanEnable="0" TELNETLanEnable="1" TELNETWanEnable="0" SSHLanEnable="0" SSHWanEnable="0" HTTPPORT="80" FTPPORT="21" TELNETPORT="23" SSHPORT="22"/>
 ```
 
+Upload the saved configuration file to the ONT.
+
 Login using telnet on port 23.
 
 ![image](https://user-images.githubusercontent.com/9054080/236683413-d9595b7a-31b5-4123-8985-67e6adf5ceaa.png)
