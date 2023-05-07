@@ -141,7 +141,7 @@ mqtt:
       unit_of_measurement: "%"
 ```
 
-Showm as a card.
+Shown as a card.
 
 ![image](https://user-images.githubusercontent.com/9054080/236692518-3e176cd1-95a3-4564-8adc-9b5b20bc36cc.png)
 
