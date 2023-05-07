@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import telnetlib
 import time
+import sys
 import paho.mqtt.client as mqtt
 #pip install paho-mqtt
 
@@ -28,6 +29,7 @@ try:
 
 except Exception:
    print("Connection failed")
+   sys.exit()
 
 output=''
 for cmd in cmds:
