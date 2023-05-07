@@ -1,5 +1,5 @@
 # huawei-ont-2-mqtt
-Send Huawei ONT (Optical Network Terminator, i.e. GPON Media converter to Ethernet) info to MQTT broker. I've created this script to integrate my Huawei HG8010H into HomeAssistant through MQTT. HomeAssistant accesses the data using an MQTT sensor for each value.
+Send Huawei ONT (Optical Network Terminator, i.e. GPON Media converter to Ethernet) statistics to MQTT broker. I've created this script to integrate my Huawei HG8010H (ISP provided) into HomeAssistant through MQTT. HomeAssistant presents the data using an MQTT sensor for each value.
 The script can run anywhere, as long as the ONT management interface and the MQTT are reachable. I've crontab'ed it to run every 10 minutes.
 
 # How it works
@@ -32,12 +32,10 @@ The statistics are sent to the MQTT broker.
 # Prerequisites/Steps
 - MQTT broker (not covered here)
 - ONT configuration
-  - IP access to ONT management interface (see note below)
+  - IP access to ONT management interface (not covered here, see note[^1] below)
   - Enable telnet remote access
 - Python3 environnment requirement
 - HomeAssistant Sensor
-
-IP access to ONT management is also necessary. There are tutorials to do so. In my own case, I do have the ONT and my own firewall. My ISP requires a PPPoE session on the firewall WAN Ethernet interface. A VLAN interface on the required VLAN attached to Ethernet interface does the trick.
 
 ## Script variables
 ONT Admin credentials. Defaults are `root`/`admin` or `telecomadmin`/`admintelecom`.
@@ -99,13 +97,13 @@ There are several commands for statistics available. Use command `?` to display 
 
 ONT is now configured.
 
-##Python3 environnment requirement
+## Python3 environnment requirement
 The script relies on telnetlib and paho-mqtt. They can be installed using command:
 ```
 pip install paho-mqtt telnetlib
 ```
 
-#HomeAssistant sensor
+# HomeAssistant sensor
 The following `configuration.yaml` mqtt section matches the default script `cmds[]` and `fields[]` configuration. The MQTT integration shall already be set up.
 
 ```
@@ -146,3 +144,7 @@ mqtt:
 Showm as a card.
 
 ![image](https://user-images.githubusercontent.com/9054080/236692518-3e176cd1-95a3-4564-8adc-9b5b20bc36cc.png)
+
+# Notes
+
+[^1]: IP access to ONT management is  necessary. There are tutorials to do configure routing and interface configuration if necessary. In my own case, I do have the ONT and my own firewall, the ISP box is absent. My ISP requires a PPPoE session on the firewall WAN Ethernet interface. A VLAN interface (id depends on the ISP) attached to Ethernet interface with an IP in the same subnet as the ONT does the trick.
