@@ -1,5 +1,5 @@
 # huawei-ont-2-mqtt
-Send Huawei ONT (Optical Network Terminator, i.e. GPON Media converter to Ethernet) statistics to MQTT broker. I've created this script to integrate my Huawei HG8010H (ISP provided) into HomeAssistant through MQTT. HomeAssistant presents the data using an MQTT sensor for each value.
+Fetch Huawei ONT (Optical Network Terminator, i.e. GPON "media converter" to Ethernet) statistics using telnet and sends the data to a MQTT broker. I've created this script to integrate my Huawei HG8010H (ISP provided) into HomeAssistant through MQTT. HomeAssistant presents the data using an MQTT sensor for each value.
 The script can run anywhere, as long as the ONT management interface and the MQTT are reachable. I've crontab'ed it to run every 10 minutes.
 
 # How it works
