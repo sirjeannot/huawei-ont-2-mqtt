@@ -63,6 +63,69 @@ Fields to look for displayed by the commands before. The following list is the o
 fields=["LinkStatus","Voltage","Temperature","RxPower","TxPower","CpuUsed","MemUsed"]
 ```
 
+There are other statistics of interest. However the script splits the line into elements, element 0 being the field name and 2 the value. For names with multiple words, the script should be modified.
+```
+WAP>display optic
+LinkStatus  : ok
+Voltage      : 3317 (mV)
+Bias         : 7 (mA)
+Temperature  : 53 (C)
+RxPower      : -19.07 (dBm)
+TxPower      :  2.16 (dBm)
+RfRxPower    : -- (dBm)
+RfOutputPower: -- (dBmV)
+VendorName   : HUAWEI
+VendorSN     : xxx
+VendorRev    :
+VendorPN     : xxx
+DateCode     : xxx
+
+success!
+WAP>display sysinfo
+*************** system infomation ***************
+CpuUsed  = 4 Percent(s)
+MemUsed  = 70 Percent(s)
+CurTime  = 2023-xx-xx xx:xx:xx
+*************************************************
+
+WAP>display pon statistics
+GPON statistic as follow:
+Rx unicast packets    : 15450712
+Tx unicast packets    : 4902623
+Rx broadcast packets  : 0
+Tx broadcast packets  : 135
+Rx multicast packets  : 488687744
+Tx multicast packets  : 0
+Dropped packets       : 0
+
+Tx ploam              : 88605
+Tx omci               : 20499
+Tx gem                : 19992371
+Bip err               : 0
+Rx ploam right        : 233109
+Rx ploam wrong        : 0
+Rx ploam drop         : 0
+Rx omci               : 20236
+Rx gem                : 504158692
+Rx mc gem             : 488687744
+Ds key switch         : 0
+Rx omci overflow      : 0
+Tx octets             : 2222947148
+Tx packets            : 4902758
+Rx oversize           : 5757080
+Rx octets             : 2079797555
+Rx packets            : 504138456
+Rx undersize          : 0
+Rx 64 octets          : 354816
+Rx 65 to 127 octets   : 1097083
+Rx 128 to 255 octets  : 410591
+Rx 256 to 511 octets  : 108356
+Rx 512 to 1023 octets : 145463
+Rx 1024 to 1518 octets: 496265067
+
+success!
+
+```
 
 ## ONT Configuration
 The goal is to enable telnet for remote access.
