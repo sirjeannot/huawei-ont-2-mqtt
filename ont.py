@@ -14,9 +14,9 @@ mqttUser='<your_mqtt_broker_user>'
 mqttPassword='<your_mqtt_broker_password>'
 mqttTopic='<your_mqtt_topic>'
 
-cmds=["display optic","display sysinfo","quit"]
-#cmds=["display optic","display sysinfo","display pon statistics","clear pon statisctics","quit"]
-fields=["LinkStatus","Voltage","Temperature","RxPower","TxPower","CpuUsed","MemUsed"]
+#cmds=["display optic","display sysinfo","quit"]
+cmds=["display optic","display sysinfo","display pon statistics","clear pon statisctics","quit"]
+fields=["LinkStatus","Bias","Voltage","Temperature","RxPower","TxPower","CpuUsed","MemUsed",,"Bip-err"]
 
 try:
    tn=telnetlib.Telnet(host)
@@ -41,10 +41,13 @@ client=mqtt.Client(mqttTopic)
 client.username_pw_set(mqttUser,mqttPassword)
 client.connect(mqttBroker)
 for line in output.splitlines():
-   data=line.split()
-   if len(data)>0:
+   data=' '.join(line.split()) #remove all multispaces
+   data=data.replace('=',':').split(":") #normalize separator and split
+   if len(data)>1:
+      data[0]=data[0].replace(' ','-',data[0].count(' ')-1).replace(' ','') #replace spaces in names and remove last space
       if data[0] in fields:
-         print(data[0] + "\t" + data[2])
-         client.publish(mqttTopic+"/"+data[0],data[2])
+         data[1]=data[1].split()[0]  #data[0] is field name, data[1] is value with unit which should be removed
+         print(data[0] + "\t" + data[1])
+         client.publish(mqttTopic+"/"+data[0],data[1])
          time.sleep(0.15)
 client.disconnect()
