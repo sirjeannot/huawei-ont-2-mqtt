@@ -58,7 +58,7 @@ Commands to use do get required values. There are more commands available using 
 ```
 cmds=["display optic","display sysinfo","quit"]
 ```
-Fields to look for displayed by the commands before. The following list is the one I used, but there are more values available.
+Fields to look for displayed by the commands before. The following list is the one I used, but there are more values available. Fields containing spaces should replace these with `-`. Ex: `Bip err` should be listed as `Bip-err` in the `fields[]` array.
 ```
 fields=["LinkStatus","Voltage","Temperature","RxPower","TxPower","CpuUsed","MemUsed"]
 ```
@@ -88,6 +88,7 @@ MemUsed  = 70 Percent(s)
 CurTime  = 2023-xx-xx xx:xx:xx
 *************************************************
 
+success!
 WAP>display pon statistics
 GPON statistic as follow:
 Rx unicast packets    : 15450712
