@@ -3,7 +3,6 @@ import telnetlib
 import time
 import sys
 import paho.mqtt.client as mqtt
-#pip install paho-mqtt
 
 user='root'
 password='admin'
@@ -25,7 +24,7 @@ try:
    tn.read_until(b"Password:")
    tn.write(password.encode('ascii') + b"\n")
    tn.read_until(b"WAP>")
-   print("Connection establised")
+   print("Connection established")
 
 except Exception:
    print("Connection failed")
