@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import telnetlib
+import pexpect
 import time
 import sys
 import paho.mqtt.client as mqtt
@@ -18,22 +18,25 @@ cmds=["display optic","display sysinfo","display pon statistics","clear pon stat
 fields=["LinkStatus","Bias","Voltage","Temperature","RxPower","TxPower","CpuUsed","MemUsed",,"Bip-err"]
 
 try:
-   tn=telnetlib.Telnet(host)
-   tn.read_until(b"Login:")
-   tn.write(user.encode('ascii') + b"\n")
-   tn.read_until(b"Password:")
-   tn.write(password.encode('ascii') + b"\n")
-   tn.read_until(b"WAP>")
-   print("Connection established")
+   tn = pexpect.spawn("telnet " + host, timeout=2)
+   tn.expect ("Login:")
+   tn.sendline (user)
+   tn.expect ("Password:")
+   tn.sendline (password)
 
 except Exception:
    print("Connection failed")
    sys.exit()
 
+if tn.expect(["WAP>", pexpect.TIMEOUT]) == 1:
+   print("Connection failed")
+   sys.exit()
+
 output=''
 for cmd in cmds:
-   tn.write(cmd.encode('ascii') + b"\n")
-   output+=tn.read_until(b"WAP>").decode('ascii')
+   tn.sendline(cmd.encode('ascii') + b"\n")
+   tn.expect("WAP>")
+   output += tn.before.decode('ascii')
    time.sleep(.3)
 
 client=mqtt.Client(mqttTopic)
