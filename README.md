@@ -164,10 +164,11 @@ There are several commands for statistics available. Use command `?` to display 
 ONT is now configured.
 
 ## Python3 environnment requirement
-The script relies on telnetlib and paho-mqtt. They can be installed using command:
+The script relies on pexpect, paho-mqtt. They can be installed using command:
 ```
-pip install paho-mqtt telnetlib
+pip3 install pexpect, paho-mqtt
 ```
+As telnetlib is now deprecated, the script uses the system telnet client.
 
 # HomeAssistant sensor
 The following `configuration.yaml` mqtt section matches the default script `cmds[]` and `fields[]` configuration. The MQTT integration shall already be set up.
