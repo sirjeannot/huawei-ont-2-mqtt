@@ -15,7 +15,7 @@ mqttTopic='<your_mqtt_topic>'
 
 #cmds=["display optic","display sysinfo","quit"]
 cmds=["display optic","display sysinfo","display pon statistics","clear pon statisctics","quit"]
-fields=["LinkStatus","Bias","Voltage","Temperature","RxPower","TxPower","CpuUsed","MemUsed",,"Bip-err"]
+fields=["LinkStatus","Bias","Voltage","Temperature","RxPower","TxPower","CpuUsed","MemUsed","Bip-err"]
 
 try:
    tn = pexpect.spawn("telnet " + host, timeout=2)
